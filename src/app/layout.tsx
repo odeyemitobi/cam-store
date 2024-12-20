@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CAMSTORE",
+  title: "Camstore",
   description: "A simple camera e-commerce store landing page",
 };
 
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
         <Navbar />
-        <div>{children}</div>
+        <div className="pt-[100px]">{children}</div>
       </body>
     </html>
   );
