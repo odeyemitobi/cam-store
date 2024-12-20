@@ -109,7 +109,7 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-2">
-          <RiSearch2Line size={24} className="" />
+            <RiSearch2Line size={24} color="#777777" />
             <div className="flex items-center gap-3">
               <div className="border cursor-pointer border-[#777777] rounded-full p-2">
                 <div className="relative">
