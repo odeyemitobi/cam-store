@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
         <Navbar />
-        <div className="pt-[100px]">{children}</div>
+        <div className="">{children}</div>
       </body>
     </html>
   );
