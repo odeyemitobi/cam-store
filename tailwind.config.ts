@@ -12,6 +12,11 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      screens: {
+        maxlg: '1920px',
+        xlg: '1680px',
+        xxl: '1440px',
+      },
     },
   },
   plugins: [],
