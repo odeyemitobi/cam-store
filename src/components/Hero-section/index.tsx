@@ -1,72 +1,15 @@
 import Image from "next/image";
 import { CustomButton } from "@/components/Button/Blue-button";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
+import { useHeroAnimations } from "./hooks";
 
 export default function Hero() {
-  const headingRef = useRef(null);
-  const paragraphRef = useRef(null);
-  const buttonRef = useRef(null);
-  const imageRef = useRef(null);
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    // Initial animation timeline
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-
-    // Container fade in
-    tl.fromTo(containerRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.5 }
-    );
-
-    // Heading animation
-    tl.fromTo(headingRef.current,
-      { y: 100, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1 }
-    );
-
-    // Paragraph animation
-    tl.fromTo(paragraphRef.current,
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, delay: 0.2 }
-    );
-
-    // Button animation
-    tl.fromTo(buttonRef.current,
-      { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" },
-      "-=0.5"
-    );
-
-    // Image animation
-    tl.fromTo(imageRef.current,
-      { x: 100, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1 },
-      "-=1"
-    );
-
-    // Image parallax effect on mouse move
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const xPos = (clientX / window.innerWidth - 0.5) * 20;
-      const yPos = (clientY / window.innerHeight - 0.5) * 20;
-
-      gsap.to(imageRef.current, {
-        x: xPos,
-        y: yPos,
-        duration: 1,
-        ease: "power2.out"
-      });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    // Cleanup function
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
+  const {
+    headingRef,
+    paragraphRef,
+    buttonRef,
+    imageRef,
+    containerRef
+  } = useHeroAnimations();
 
   return (
     <div 

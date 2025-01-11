@@ -2,7 +2,8 @@
 
 import React from "react";
 import Hero from "@/components/Hero-section";
-import ProductShowcase from "./../components/Product-showcase/index";
+import ProductShowcase from "./../components/Product-showcase";
+import ProductBestsellers from "./../components/Product-Bestsellers";
 
 export default function Page() {
   return (
@@ -12,6 +13,9 @@ export default function Page() {
       </div>
       <div>
         <ProductShowcase />
+      </div>
+      <div>
+        <ProductBestsellers />
       </div>
     </div>
   );

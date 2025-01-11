@@ -1,47 +1,59 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
+interface AnimationRefs {
+  headingRef: React.RefObject<HTMLHeadingElement | null>;
+  paragraphRef: React.RefObject<HTMLParagraphElement | null>;
+  buttonRef: React.RefObject<HTMLDivElement | null>;
+  imageRef: React.RefObject<HTMLDivElement | null>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
+}
 
-export const useHeroAnimation = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+export const useHeroAnimations = (): AnimationRefs => {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const initializeAnimations = () => {
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+    // Initial animation timeline
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-      tl.fromTo(containerRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5 }
-      );
+    // Container fade in
+    tl.fromTo(containerRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5 }
+    );
 
-      tl.fromTo(headingRef.current,
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1 }
-      );
+    // Heading animation
+    tl.fromTo(headingRef.current,
+      { y: 100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1 }
+    );
 
-      tl.fromTo(paragraphRef.current,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, delay: 0.2 }
-      );
+    // Paragraph animation
+    tl.fromTo(paragraphRef.current,
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, delay: 0.2 }
+    );
 
-      tl.fromTo(buttonRef.current,
-        { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" },
-        "-=0.5"
-      );
+    // Button animation
+    tl.fromTo(buttonRef.current,
+      { scale: 0, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" },
+      "-=0.5"
+    );
 
-      tl.fromTo(imageRef.current,
-        { x: 100, opacity: 0 },
-        { x: 0, opacity: 1, duration: 1 },
-        "-=1"
-      );
-    };
+    // Image animation
+    tl.fromTo(imageRef.current,
+      { x: 100, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1 },
+      "-=1"
+    );
 
-    const handleParallax = (e: MouseEvent) => {
+    // Image parallax effect on mouse move
+    const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const xPos = (clientX / window.innerWidth - 0.5) * 20;
       const yPos = (clientY / window.innerHeight - 0.5) * 20;
@@ -54,20 +66,19 @@ export const useHeroAnimation = () => {
       });
     };
 
-    initializeAnimations();
+    window.addEventListener("mousemove", handleMouseMove);
 
-    window.addEventListener("mousemove", handleParallax);
-
+    // Cleanup function
     return () => {
-      window.removeEventListener("mousemove", handleParallax);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
   return {
-    containerRef,
     headingRef,
     paragraphRef,
     buttonRef,
     imageRef,
+    containerRef
   };
 };
