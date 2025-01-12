@@ -1,13 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-
-interface AnimationRefs {
-  headingRef: React.RefObject<HTMLHeadingElement | null>;
-  paragraphRef: React.RefObject<HTMLParagraphElement | null>;
-  buttonRef: React.RefObject<HTMLDivElement | null>;
-  imageRef: React.RefObject<HTMLDivElement | null>;
-  containerRef: React.RefObject<HTMLDivElement | null>;
-}
+import { AnimationRefs } from "@/types";
 
 export const useHeroAnimations = (): AnimationRefs => {
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -17,42 +10,35 @@ export const useHeroAnimations = (): AnimationRefs => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Initial animation timeline
     const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-    // Container fade in
     tl.fromTo(containerRef.current,
       { opacity: 0 },
       { opacity: 1, duration: 0.5 }
     );
 
-    // Heading animation
     tl.fromTo(headingRef.current,
       { y: 100, opacity: 0 },
       { y: 0, opacity: 1, duration: 1 }
     );
 
-    // Paragraph animation
     tl.fromTo(paragraphRef.current,
       { y: 40, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.8, delay: 0.2 }
     );
 
-    // Button animation
     tl.fromTo(buttonRef.current,
       { scale: 0, opacity: 0 },
       { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" },
       "-=0.5"
     );
 
-    // Image animation
     tl.fromTo(imageRef.current,
       { x: 100, opacity: 0 },
       { x: 0, opacity: 1, duration: 1 },
       "-=1"
     );
 
-    // Image parallax effect on mouse move
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const xPos = (clientX / window.innerWidth - 0.5) * 20;
@@ -68,7 +54,6 @@ export const useHeroAnimations = (): AnimationRefs => {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Cleanup function
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };

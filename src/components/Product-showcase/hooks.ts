@@ -1,23 +1,9 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { ProductShow } from "@/types";
 
-interface ProductAnimation {
-  x: number;
-  y: number;
-  rotation: number;
-}
-
-interface Product {
-  category: string;
-  brand: string;
-  description: string;
-  bgColor: string;
-  image: string;
-  animation: ProductAnimation;
-}
-
-export const useProductShowcaseAnimations = (products: Product[]) => {
+export const useProductShowcaseAnimations = (products: ProductShow[]) => {
   const containerRef = useRef(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -126,8 +112,7 @@ export const useProductShowcaseAnimations = (products: Product[]) => {
   };
 };
 
-// Product data
-export const productData: Product[] = [
+export const productData: ProductShow[] = [
   {
     category: "Camera",
     brand: "FUJIFILM",

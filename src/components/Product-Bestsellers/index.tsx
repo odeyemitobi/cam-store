@@ -1,16 +1,7 @@
 import React from "react";
 import { CustomButton } from "@/components/Button/Blue-button";
 import Image from "next/image";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  originalPrice: number;
-  discount: number;
-  image: string;
-  description: string;
-}
+import { Product } from "@/types";
 
 const products: Product[] = [
   {
@@ -95,7 +86,7 @@ const ProductBestsellers = () => {
                 </button>
               </div>
             </div>
-            
+
             <div className="space-y-2">
               <p className="text-sm text-gray-500">{product.description}</p>
               <h3 className="text-lg font-semibold">{product.name}</h3>
